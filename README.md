@@ -43,6 +43,9 @@ Update File Path: Open the GA_FS_CD.m script in the MATLAB editor. You must upda
 % CHANGE THIS PATH
 load("C:\path\to\your\folder\cancer_data.mat", 'X', 'y');
 
+
+<img width="657" height="281" alt="image" src="https://github.com/user-attachments/assets/9dc8d5ed-c7fe-4ec5-8803-d9e2ddc54ebe" />
+
 Execute: Run the GA_FS_CD.m script. The script will output the progress for each generation to the command window and display plots of the results upon completion.
 
 Methodology
