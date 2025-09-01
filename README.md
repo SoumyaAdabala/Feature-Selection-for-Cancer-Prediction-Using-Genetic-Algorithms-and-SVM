@@ -62,7 +62,7 @@ Results
 After running for 50 generations, the algorithm identifies the best subset of features based on the highest achieved fitness score (classification accuracy).
 
 <img width="1471" height="916" alt="Results" src="https://github.com/user-attachments/assets/707c2206-d660-47cd-a542-e9011ac48a9f" />
-<img width="1471" height="916" alt="Results" src="https://github.com/user-attachments/assets/2b908765-e312-462b-b279-c0c9c8fe64be" />
+
 
 
 Command Window Output
