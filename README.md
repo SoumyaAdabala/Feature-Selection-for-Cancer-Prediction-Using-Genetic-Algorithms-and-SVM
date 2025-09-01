@@ -5,63 +5,89 @@ Applied GA-based feature selection on cancer datasets, reducing features from 30
 Here is a README file for GitHub, based on the provided sources:
 
 ---
+Genetic Algorithm for Feature Selection in Cancer Prediction
+This project demonstrates the application of a Genetic Algorithm (GA) to perform feature selection for a cancer prediction machine learning model. The goal is to identify the most relevant features in a dataset, thereby reducing dimensionality, improving model accuracy, and increasing computational efficiency. A Support Vector Machine (SVM) classifier is used to evaluate the fitness of each feature subset selected by the GA.
 
-# **Genetic Algorithm for Feature Selection in Cancer Prediction**
+The Problem: Curse of Dimensionality
+In machine learning, especially with bioinformatics data, datasets can contain a vast number of features (e.g., gene expressions, protein sequences). This "curse of dimensionality" can lead to several issues:
 
-## **Project Overview**
+Overfitting: The model learns the training data too well, including noise, and performs poorly on new, unseen data.
 
-This project demonstrates the application of **Genetic Algorithms (GA) for feature selection in training machine learning (ML) models for cancer prediction**. The primary goal is to **optimise the selection of the most relevant features** from a given dataset to improve model performance, reduce dimensionality, and increase computational efficiency. This addresses the "Curse of dimensionality," where unnecessary data leads to excessive complications and can create uncertainty about cancer prognosis.
+Increased Computational Cost: More features mean more processing power and time are required to train the model.
 
-Genetic testing analyses DNA to find mutations linked to cancer risk, generating bioinformatics data with diverse features like gene expressions and protein sequences. Handling such complex data efficiently is crucial. **Genetic Algorithms (GA) are employed in feature selection to optimise the selection of relevant features by evolving subsets that maximise model performance**. GAs help in reducing dimensionality by identifying the most significant features, thereby improving computational efficiency and model accuracy.
+Uncertainty: Unnecessary features can introduce noise and make it harder to interpret the model's predictions.
 
-## **Why Genetic Algorithms?**
+The Solution: Genetic Algorithms
+Genetic Algorithms (GAs) are a powerful optimization technique inspired by the process of natural selection. They are well-suited for feature selection because they can efficiently search large and complex spaces to find an optimal subset of features. By evolving a population of feature subsets over generations, the GA identifies the features that contribute most to the model's predictive power.
 
-Genetic Algorithms are chosen for feature selection because they are:
-*   **Flexible**
-*   **Adaptable**
-*   **Robust**
-*   **Efficiently handle complex and nonlinear feature interactions**
+This approach helps to:
 
-## **Key Components**
+Select the most significant features.
 
-*   **Feature Selection**: The core solution to the "Curse of dimensionality," involving selecting the right subset of data to improve computational efficiency and model accuracy.
-*   **Genetic Algorithms (GA)**: Used to evolve subsets of features, aiming to maximise model performance.
-*   **Support Vector Machine (SVM)**: The machine learning algorithm used to classify cancer data and evaluate the performance of selected features. It is used for model training and evaluation within the fitness function.
-*   **Fitness Function**:
-    *   **Objective**: To evaluate the performance of feature subsets based on classification accuracy.
-    *   **Inputs**: Feature Matrix X (n × m samples x features), Target Labels y (n × 1), and Selected Features s (m × 1 binary vector).
-    *   **Evaluation**: Uses **k-fold cross-validation (specifically 5-fold cross-validation)** to evaluate SVM model performance and compute accuracy for each fold. The fitness score is the average accuracy across all folds.
+Reduce the complexity of the model.
 
-## **Dataset**
+Improve the accuracy and efficiency of the final classifier.
 
-*   **`cancer_data.mat`**:
-    *   This dataset contains cancer-related features and their corresponding labels.
-    *   It comprises **30 features and an associated class label for each sample**.
+Files in This Repository
+GA_FS_CD.m: The main MATLAB script that implements the Genetic Algorithm for feature selection.
 
-## **Program Code Files**
+cancer_data.mat: The dataset file containing a matrix X with 30 features for multiple samples and a vector y with the corresponding class labels.
 
-*   **`GA_FS_CD.m`**:
-    *   A MATLAB script that implements a Genetic Algorithm for feature selection.
-    *   It loads the `cancer_data.mat` dataset and uses GA to select optimal features, enhancing the accuracy of the SVM model.
+How to Run the Code
+Prerequisites: Ensure you have MATLAB installed on your system.
 
-## **Results and Visualisation**
+Clone Repository: Download or clone this repository to your local machine.
 
-The script generates plots to visualise the project's outcomes, including:
-*   **Fitness score over generations**
-*   **Feature selection across generations**
-*   **Frequency of feature selection**
+Update File Path: Open the GA_FS_CD.m script in the MATLAB editor. You must update the file path on line 2 to point to the location of cancer_data.mat on your computer.
 
-## **Applications**
+% CHANGE THIS PATH
+load("C:\path\to\your\folder\cancer_data.mat", 'X', 'y');
 
-The principles and methodology demonstrated in this project have broad applications, including:
-*   **Healthcare Diagnosis**
-*   **Customer Segmentation**
-*   **Predictive Maintenance**
+Execute: Run the GA_FS_CD.m script. The script will output the progress for each generation to the command window and display plots of the results upon completion.
 
-## **References**
+Methodology
+The algorithm follows the steps outlined in the flowchart below. It starts by loading the data and initializing a population of "chromosomes," where each chromosome represents a subset of features. In a loop, it evaluates the fitness of each subset using an SVM classifier with 5-fold cross-validation, then performs selection, crossover, and mutation to create a new generation of feature subsets. This process repeats for 50 generations.
 
-*   Liu, B. G., Xu, L. J., Wang, Y. H., & Tang, J. H. (2012). Genetic Algorithm-Based Feature Selection for Classification: A Comparative Study. Presented at the IEEE International Conference on Systems, Man, and Cybernetics (SMC). Available at IEEE Xplore.
-*   García, J. S., Gómez, J. A., & Carrillo, A. J. L. (2013). Feature Selection Using Genetic Algorithms: A Review. IEEE Transactions on Evolutionary Computation. Available at IEEE Xplore.
-*   Pal, S. K., Sinha, S. K., & Chaudhuri, B. B. (2011). Feature Selection for Classification Using Genetic Algorithms. Pattern Recognition. Available at ScienceDirect.
+Key GA Parameters:
 
----
+Population Size: 50
+
+Number of Generations: 50
+
+Mutation Rate: 0.05
+
+Number of Features to Select: 15 (half of the total features)
+
+Results
+After running for 50 generations, the algorithm identifies the best subset of features based on the highest achieved fitness score (classification accuracy).
+
+<img width="1471" height="916" alt="Results" src="https://github.com/user-attachments/assets/707c2206-d660-47cd-a542-e9011ac48a9f" />
+<img width="1471" height="916" alt="Results" src="https://github.com/user-attachments/assets/2b908765-e312-462b-b279-c0c9c8fe64be" />
+
+
+Command Window Output
+The command window shows the best fitness score at each generation and lists the final set of selected features.
+
+Final Selected Features
+The following features were selected by the algorithm as the most optimal set:
+
+3, 7, 8, 9, 10, 11, 16, 17, 18, 19, 21, 24, 26, 28, 29
+
+Performance Plots
+The following plots visualize the performance and behavior of the Genetic Algorithm during the selection process.
+
+Fitness Score Over Generations: This plot shows the best fitness score (accuracy) in each generation. The fluctuations indicate the exploratory nature of the GA as it seeks the optimal solution.
+
+Feature Selection Across Generations: This heatmap visualizes which features (columns) were selected in the best-performing chromosome of each generation (rows). White indicates a selected feature, and black indicates a non-selected feature.
+
+Feature Selection Frequency: This bar chart shows how many times each feature was selected across all generations, highlighting the most consistently important features.
+
+Conclusion
+This project successfully demonstrates that Genetic Algorithms are an effective method for feature selection in high-dimensional datasets. By systematically identifying and selecting the most impactful features, the GA helps to build a more robust and efficient SVM classifier for cancer prediction. This methodology has broad applications in fields where data is complex, including healthcare diagnostics, customer segmentation, and predictive maintenance.
+
+References
+Liu, B. G., Xu, L. J., Wang, Y. H., & Tang, J. H. (2012). Genetic Algorithm-Based Feature Selection for Classification: A Comparative Study. IEEE International Conference on Systems, Man, and Cybernetics (SMC).
+
+García, J. S., Gómez, J. A., & Carrillo, A. J. L. (2013). Feature Selection Using Genetic Algorithms: A Review. IEEE Transactions on Evolutionary Computation.
+
+Pal, S. K., Sinha, S. K., & Chaudhuri, B. B. (2011). Feature Selection for Classification Using Genetic Algorithms. Pattern Recog---
